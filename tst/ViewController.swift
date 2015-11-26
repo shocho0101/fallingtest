@@ -17,16 +17,7 @@ class ViewController: UIViewController {
     
     var timer: NSTimer!
     var downTimer: NSTimer!
-    
-    var ytimer0: NSTimer!
-    var ytimer1: NSTimer!
-    var ytimer2: NSTimer!
-    var ytimer3: NSTimer!
-    
-//    var yCounter0: CGFloat = 0.0
-//    var yCounter1: CGFloat = 0.0
-//    var yCounter2: CGFloat = 0.0
-//    var yCounter3: CGFloat = 0.0
+
     
     var testImageView0: UIImageView!
     var testImageView1: UIImageView!
@@ -43,17 +34,7 @@ class ViewController: UIViewController {
         
         downTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "onUpdateDown:", userInfo: nil, repeats: true)
         downTimer.fire()
-        
-//        ytimer0 = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "fallDown0:", userInfo: nil, repeats: true)
-//        ytimer1 = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "fallDown1:", userInfo: nil, repeats: true)
-//        ytimer2 = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "fallDown2:", userInfo: nil, repeats: true)
-//        ytimer3 = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "fallDown3:", userInfo: nil, repeats: true)
-        
-//        ytimer0.fire()
-//        ytimer1.fire()
-//        ytimer2.fire()
-//        ytimer3.fire()
-        
+
 
     }
 
@@ -137,19 +118,16 @@ class ViewController: UIViewController {
     }
     
     
-    func fallDown0(){
+    func fallDown(){
         y0 = y0 + 5.0
         if testImageView0 != nil{
             testImageView0.frame = CGRectMake(100, y0 , 80, 80)
-            
             if y0 > 400{
                 testImageView0.removeFromSuperview()
                 y0 = 0
             }
         }
-    }
-    
-    func fallDown1(){
+        
         y1 = y1 + 5.0
         if testImageView1 != nil{
             testImageView1.frame = CGRectMake(200, y1, 80, 80)
@@ -159,9 +137,7 @@ class ViewController: UIViewController {
                 y1 = 0
             }
         }
-    }
-    
-    func fallDown2(){
+        
         y2 = y2 + 5.0
         if testImageView2 != nil{
             testImageView2.frame = CGRectMake(300, y2,80,80)
@@ -171,9 +147,7 @@ class ViewController: UIViewController {
                 y2 = 0
             }
         }
-    }
-    
-    func fallDown3(){
+        
         y3 = y3 + 5.0
         if testImageView3 != nil{
             testImageView3.frame = CGRectMake(400, y3, 80, 80)
@@ -185,8 +159,9 @@ class ViewController: UIViewController {
         }
     }
 
-
-    //二秒おきにimageViewを生成する
+    
+    
+//        //二秒おきにimageViewを生成する
     func onUpdate(timer : NSTimer){
         
         //ランダム　0~3から一つを選ぶ
@@ -204,19 +179,12 @@ class ViewController: UIViewController {
             makeImageView3()
         default :
             break
-
         }
-        
     }
     
     //imageViewを下に落とす動作
     func onUpdateDown(timer: NSTimer){
-        fallDown0()
-        fallDown1()
-        fallDown2()
-        fallDown3()
-
+        fallDown()
     }
-
 }
 
