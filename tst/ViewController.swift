@@ -84,7 +84,7 @@ class ViewController: UIViewController {
         
 
         //二秒おきにImageViewを作る
-        timer = NSTimer.scheduledTimerWithTimeInterval(2.0, target: self, selector: "onUpdate:", userInfo: nil, repeats: true)
+        timer = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "onUpdate:", userInfo: nil, repeats: true)
         timer.fire()
         
         downTimer = NSTimer.scheduledTimerWithTimeInterval(0.01, target: self, selector: "onUpdateDown:", userInfo: nil, repeats: true)
@@ -97,18 +97,18 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
-    func fallDown(){
-        if testImageView0 != nil{
+    //ImageViewを落とす
+    func fallDown() {
+        if testImageView0 != nil {
             y0 = y0 + 1.0
             testImageView0.frame = CGRectMake(40, y0 , 80, 80)
-            if y0 > 400 || y0 > yUp0 {
+            if y0 > 400 || y0 > yUp0 {    //条件：ある程度下に来たら消すor下から来たImageVIewと重なったら消す
                 testImageView0.removeFromSuperview()
                 y0 = 0
             }
         }
         
-        if testImageView1 != nil{
+        if testImageView1 != nil {
             y1 = y1 + 1.0
             testImageView1.frame = CGRectMake(140, y1, 80, 80)
             
@@ -118,7 +118,7 @@ class ViewController: UIViewController {
             }
         }
         
-        if testImageView2 != nil{
+        if testImageView2 != nil {
             y2 = y2 + 1.0
             testImageView2.frame = CGRectMake(240, y2,80,80)
             
@@ -128,51 +128,48 @@ class ViewController: UIViewController {
             }
         }
         
-        if testImageView3 != nil{
+        if testImageView3 != nil {
             y3 = y3 + 1.0
             testImageView3.frame = CGRectMake(340, y3, 80, 80)
             
             if y3 > 400 || y3 > yUp3 {
                 testImageView3.removeFromSuperview()
                 y3 = 0
-                
             }
         }
     }
     
+    //ImageViewを上へ向けて打つ
     func up(){
-        if upImageView0 != nil{
+        if upImageView0 != nil {
             yUp0 = yUp0 - 5.0
             upImageView0.frame = CGRectMake(40, yUp0, 80, 80)
-            if yUp0 < 80{
+            if yUp0 < 80 {
                 upImageView0.removeFromSuperview()
                 yUp0 = 500
-        
             }
         }
         
-        if upImageView1 != nil{
+        if upImageView1 != nil {
             yUp1 = yUp1 - 5.0
             upImageView1.frame = CGRectMake(140, yUp1, 80, 80)
-            if yUp0 < 80{
+            if yUp1 < 80 {
                 upImageView1.removeFromSuperview()
                 yUp1 = 500
-                
             }
         }
         
-        if upImageView2 != nil{
+        if upImageView2 != nil {
             yUp2 = yUp2 - 5.0
             upImageView2.frame = CGRectMake(240, yUp2, 80, 80)
-            if yUp0 < 80{
+            if yUp2 < 80 {
                 upImageView2.removeFromSuperview()
                 yUp2 = 500
-                
             }
         }
         
         
-        if upImageView3 != nil{
+        if upImageView3 != nil {
             yUp3 = yUp3 - 5.0
             upImageView3.frame = CGRectMake(340, yUp3, 80, 80)
             if yUp3 < 80{
@@ -183,14 +180,14 @@ class ViewController: UIViewController {
         }
     }
 
-//        //二秒おきにimageViewを生成する
-    func onUpdate(timer : NSTimer){
+    //二秒おきにimageViewを生成する
+    func onUpdate(timer : NSTimer) {
         
         //ランダム　0~3から一つを選ぶ
         let randInt = Int(rand()%4)//0,1,2,3 の中から一つ
         NSLog("\(randInt)")
         
-        switch randInt{
+        switch randInt {
         case 0:
             makeImageView0()
         case 1:
@@ -205,19 +202,16 @@ class ViewController: UIViewController {
     }
     
     //imageViewを動かす
-    func onUpdateDown(timer: NSTimer){
+    func onUpdateDown(timer: NSTimer) {
         fallDown()
         up()
     }
     
     
-    func onTapUpButton(sender: UIButton){
+    func onTapUpButton(sender: UIButton) {
         print(sender.tag)
-//        let xArray: [CGFloat] = [40.0, 140.0, 240.0, 340.0]
-//        let x: CGFloat!
-//        let y: CGFloat!
         
-        switch sender.tag{
+        switch sender.tag {
         case 0:
             NSLog("up->0")
             makeUpImageView0()
@@ -238,12 +232,14 @@ class ViewController: UIViewController {
     
     //もっと効率の良いやり方があるはず・・・//
     //ImageViewを作る機能
-    func makeImageView0(){
+    func makeImageView0() {
+        
+        if testImageView0 == nil {
         //y座標の初期化
         y0 = 0
         
-        //iamgeViewのサイズ
-        testImageView0 = UIImageView(frame: CGRectMake(0, 0, 80, 80))
+        //imageViewのサイズ
+        testImageView0 = UIImageView(frame: CGRectMake(40, 0, 80, 80))
         
         //表示位置
         testImageView0.center = CGPointMake(40, y0)
@@ -253,12 +249,13 @@ class ViewController: UIViewController {
         
         //画面にimageViewを追加する
         self.view.addSubview(testImageView0)
-        
+        }
     }
     
     
     
-    func makeImageView1(){
+    func makeImageView1() {
+        if testImageView1 == nil {
         //y座標の初期化
         y1 = 0
         
@@ -273,11 +270,11 @@ class ViewController: UIViewController {
         
         //画面にimageViewを追加する
         self.view.addSubview(testImageView1)
-        
-        
+        }
     }
     
-    func makeImageView2(){
+    func makeImageView2() {
+        if testImageView2 == nil {
         //y座標の初期化
         y2 = 0
         
@@ -292,10 +289,12 @@ class ViewController: UIViewController {
         
         //画面にimageViewを追加する
         self.view.addSubview(testImageView2)
-        
+        }
     }
     
-    func makeImageView3(){
+    func makeImageView3() {
+        if testImageView3 == nil {
+        
         //y座標の初期化
         y3 = 0
         //iamgeViewのサイズ
@@ -309,45 +308,48 @@ class ViewController: UIViewController {
         
         //画面にimageViewを追加する
         self.view.addSubview(testImageView3)
+        }
     }
     
-    func makeUpImageView0(){
+    //下から上へ打ち出すImageViewの生成
+    func makeUpImageView0() {
+        
+        if upImageView0 != nil {
+        upImageView0.removeFromSuperview()
+        }
+        
         yUp0 = 450
         
-       upImageView0 = UIImageView(frame: CGRectMake(0, 0, 80, 80))
-        
-        //表示位置
-        upImageView0.center = CGPointMake(40, yUp0)
-        
-        //imageViewの色
+        upImageView0 = UIImageView(frame: CGRectMake(40, 450, 80, 80))
+
         upImageView0.backgroundColor = UIColor(red: 0, green: 1.0, blue: 0, alpha: 1)
-        
-        //画面にimageViewを追加する
         self.view.addSubview(upImageView0)
         }
     
-    func makeUpImageView1(){
+    func makeUpImageView1() {
+        
+        if upImageView1 != nil {
+        upImageView1.removeFromSuperview()
+        }
+        
         yUp1 = 450
         
-        upImageView1 = UIImageView(frame: CGRectMake(0, 0, 80, 80))
+        upImageView1 = UIImageView(frame: CGRectMake(140, 450, 80, 80))
         
-        //表示位置
-        upImageView1.center = CGPointMake(140, yUp1)
-        
-        //imageViewの色
         upImageView1.backgroundColor = UIColor(red: 0, green: 1.0, blue: 0, alpha: 1)
         
-        //画面にimageViewを追加する
         self.view.addSubview(upImageView1)
     }
     
     func makeUpImageView2(){
+        
+        if upImageView2 != nil {
+        upImageView2.removeFromSuperview()
+        }
+        
         yUp2 = 450
         
-        upImageView2 = UIImageView(frame: CGRectMake(0, 0, 80, 80))
-        
-        //表示位置
-        upImageView2.center = CGPointMake(240, yUp2)
+        upImageView2 = UIImageView(frame: CGRectMake(240, 450, 80, 80))
         
         //imageViewの色
         upImageView2.backgroundColor = UIColor(red: 0, green: 1.0, blue: 0, alpha: 1)
@@ -356,13 +358,16 @@ class ViewController: UIViewController {
         self.view.addSubview(upImageView2)
     }
     
-    func makeUpImageView3(){
+    func makeUpImageView3() {
+        
+        if upImageView3 != nil {
+        upImageView3.removeFromSuperview()
+        }
+        
         yUp3 = 450
         
-        upImageView3 = UIImageView(frame: CGRectMake(0, 0, 80, 80))
-        
         //表示位置
-        upImageView3.center = CGPointMake(140, yUp3)
+        upImageView3 = UIImageView(frame: CGRectMake(340, 450, 80, 80))
         
         //imageViewの色
         upImageView3.backgroundColor = UIColor(red: 0, green: 1.0, blue: 0, alpha: 1)
