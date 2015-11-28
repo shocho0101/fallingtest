@@ -41,6 +41,16 @@ class ViewController: UIViewController {
     var upButton2: UIButton!
     var upButton3: UIButton!
     
+    var counter0: Int = 1
+    var counter1: Int = 1
+    var counter2: Int = 1
+    var counter3: Int = 1
+    
+    var upCounter0: Int = 1
+    var upCounter1: Int = 1
+    var upCounter2: Int = 1
+    var upCounter3: Int = 1
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -102,9 +112,10 @@ class ViewController: UIViewController {
         if testImageView0 != nil {
             y0 = y0 + 1.0
             testImageView0.frame = CGRectMake(40, y0 , 80, 80)
-            if y0 > 400 || y0 > yUp0 {    //条件：ある程度下に来たら消すor下から来たImageVIewと重なったら消す
+            if y0 > 400 || y0 > yUp0 {    //条件：ある程度下に来たら消すor下から来たImageViewと重なったら消す
                 testImageView0.removeFromSuperview()
                 y0 = 0
+                counter0 = 1
             }
         }
         
@@ -115,6 +126,7 @@ class ViewController: UIViewController {
             if y1 > 400 || y1 > yUp1 {
                 testImageView1.removeFromSuperview()
                 y1 = 0
+                counter1 = 1
             }
         }
         
@@ -125,6 +137,7 @@ class ViewController: UIViewController {
             if y2 > 400 || y2 > yUp2 {
                 testImageView2.removeFromSuperview()
                 y2 = 0
+                counter2 = 1
             }
         }
         
@@ -135,6 +148,7 @@ class ViewController: UIViewController {
             if y3 > 400 || y3 > yUp3 {
                 testImageView3.removeFromSuperview()
                 y3 = 0
+                counter3 = 1
             }
         }
     }
@@ -207,7 +221,6 @@ class ViewController: UIViewController {
         up()
     }
     
-    
     func onTapUpButton(sender: UIButton) {
         print(sender.tag)
         
@@ -229,12 +242,11 @@ class ViewController: UIViewController {
         }
     }
     
-    
     //もっと効率の良いやり方があるはず・・・//
     //ImageViewを作る機能
     func makeImageView0() {
+        if counter0 == 1 {
         
-        if testImageView0 == nil {
         //y座標の初期化
         y0 = 0
         
@@ -249,13 +261,14 @@ class ViewController: UIViewController {
         
         //画面にimageViewを追加する
         self.view.addSubview(testImageView0)
+        
+        counter0 = 0
         }
     }
     
-    
-    
     func makeImageView1() {
-        if testImageView1 == nil {
+        if counter1 == 1 {
+
         //y座標の初期化
         y1 = 0
         
@@ -270,11 +283,14 @@ class ViewController: UIViewController {
         
         //画面にimageViewを追加する
         self.view.addSubview(testImageView1)
+        
+        counter1 = 0
         }
     }
     
     func makeImageView2() {
-        if testImageView2 == nil {
+        if counter2 == 1 {
+
         //y座標の初期化
         y2 = 0
         
@@ -289,11 +305,13 @@ class ViewController: UIViewController {
         
         //画面にimageViewを追加する
         self.view.addSubview(testImageView2)
+        
+        counter2 = 0
         }
     }
     
     func makeImageView3() {
-        if testImageView3 == nil {
+        if counter3 == 1 {
         
         //y座標の初期化
         y3 = 0
@@ -308,6 +326,8 @@ class ViewController: UIViewController {
         
         //画面にimageViewを追加する
         self.view.addSubview(testImageView3)
+
+        counter3 = 0
         }
     }
     
