@@ -23,7 +23,6 @@ class ViewController: UIViewController {
     var yUp3: CGFloat = 450.0
     
     var xArray: [CGFloat] = [40.0,140.0,240.0,340.0]
-
     
     var timer: NSTimer!
     var downTimer: NSTimer!
@@ -44,15 +43,14 @@ class ViewController: UIViewController {
     var upButton2: UIButton!
     var upButton3: UIButton!
     
-    var counter0: Int = 1
-    var counter1: Int = 1
-    var counter2: Int = 1
-    var counter3: Int = 1
+    var counter0: Int = 0
+    var counter1: Int = 0
+    var counter2: Int = 0
+    var counter3: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
         
         
         //下から上へ向かうobjectを生成するためのボタン
@@ -106,94 +104,6 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    //ImageViewを落とす
-    func fallDown() {
-            
-        if testImageView0 != nil {
-            y0 = y0 + 1.0
-            testImageView0.frame = CGRectMake(xArray[0], y0 , 80, 80)
-            if y0 > 400 || y0 > yUp0 {    //条件：ある程度下に来たら消すor下から来たImageViewと重なったら消す
-                testImageView0.removeFromSuperview()
-                y0 = 0
-                counter0 = 1
-            }
-        }
-        
-        if testImageView1 != nil {
-            y1 = y1 + 1.0
-            testImageView1.frame = CGRectMake(xArray[1], y1, 80, 80)
-            
-            if y1 > 400 || y1 > yUp1 {
-                testImageView1.removeFromSuperview()
-                y1 = 0
-                counter1 = 1
-            }
-        }
-        
-        if testImageView2 != nil {
-            y2 = y2 + 1.0
-            testImageView2.frame = CGRectMake(xArray[2], y2,80,80)
-            
-            if y2 > 400 || y2 > yUp2 {
-                testImageView2.removeFromSuperview()
-                y2 = 0
-                counter2 = 1
-            }
-        }
-        
-        if testImageView3 != nil {
-            y3 = y3 + 1.0
-            testImageView3.frame = CGRectMake(xArray[3], y3, 80, 80)
-            
-            if y3 > 400 || y3 > yUp3 {
-                testImageView3.removeFromSuperview()
-                y3 = 0
-                counter3 = 1
-            }
-        }
-    }
-    
-    //ImageViewを上へ向けて打つ
-    func up(){
-        if upImageView0 != nil {
-            yUp0 = yUp0 - 5.0
-            upImageView0.frame = CGRectMake(xArray[0], yUp0, 80, 80)
-            if yUp0 < 80 {
-                upImageView0.removeFromSuperview()
-                yUp0 = 500
-            }
-        }
-        
-        if upImageView1 != nil {
-            yUp1 = yUp1 - 5.0
-            upImageView1.frame = CGRectMake(xArray[1], yUp1, 80, 80)
-            if yUp1 < 80 {
-                upImageView1.removeFromSuperview()
-                yUp1 = 500
-            }
-        }
-        
-        if upImageView2 != nil {
-            yUp2 = yUp2 - 5.0
-            upImageView2.frame = CGRectMake(xArray[2], yUp2, 80, 80)
-            if yUp2 < 80 {
-                upImageView2.removeFromSuperview()
-                yUp2 = 500
-            }
-        }
-        
-        
-        if upImageView3 != nil {
-            yUp3 = yUp3 - 5.0
-            upImageView3.frame = CGRectMake(xArray[3], yUp3, 80, 80)
-            if yUp3 < 80{
-                upImageView3.removeFromSuperview()
-                yUp3 = 500
-                
-            }
-        }
-    }
-
     //二秒おきにimageViewを生成する
     func onUpdate(timer : NSTimer) {
         makeImageView()
@@ -205,6 +115,98 @@ class ViewController: UIViewController {
         up()
     }
     
+    
+    //ImageViewを落とす
+    func fallDown() {
+            
+        if testImageView0 != nil {
+            y0 = y0 + 1.0
+            testImageView0.frame = CGRectMake(xArray[0], y0 , 80, 80)
+//            if y0 > 400 || y0 > yUp0 {    //条件：ある程度下に来たら消すor下から来たImageViewと重なったら消す
+//                                                  この二つ目の条件に問題があるっぽい
+            if y0 > 400 {
+                testImageView0.removeFromSuperview()
+                y0 = 0
+                counter0 = 0
+            }
+        }
+        
+        if testImageView1 != nil {
+            y1 = y1 + 1.0
+            testImageView1.frame = CGRectMake(xArray[1], y1, 80, 80)
+//            if y1 > 400 || y1 > yUp1 {
+            if y1 > 400 {
+                testImageView1.removeFromSuperview()
+                y1 = 0
+                counter1 = 0
+            }
+        }
+        
+        if testImageView2 != nil {
+            y2 = y2 + 1.0
+            testImageView2.frame = CGRectMake(xArray[2], y2,80,80)
+//            if y2 > 400 || y2 > yUp2 {
+            if y2 > 400 {
+                testImageView2.removeFromSuperview()
+                y2 = 0
+                counter2 = 0
+            }
+        }
+        
+        if testImageView3 != nil {
+            y3 = y3 + 1.0
+            testImageView3.frame = CGRectMake(xArray[3], y3, 80, 80)
+//            if y3 > 400 || y3 > yUp3 {
+            if y3 > 400 {
+                testImageView3.removeFromSuperview()
+                y3 = 0
+                counter3 = 0
+            }
+        }
+    }
+    
+    //ImageViewを上へ動かす
+    func up(){
+        if upImageView0 != nil {
+            yUp0 = yUp0 - 1.0
+            upImageView0.frame = CGRectMake(xArray[0], yUp0, 80, 80)
+            if yUp0 < 80 {
+                upImageView0.removeFromSuperview()
+                yUp0 = 450
+            }
+        }
+        
+        if upImageView1 != nil {
+            yUp1 = yUp1 - 1.0
+            upImageView1.frame = CGRectMake(xArray[1], yUp1, 80, 80)
+            if yUp1 < 80 {
+                upImageView1.removeFromSuperview()
+                yUp1 = 450
+            }
+        }
+        
+        if upImageView2 != nil {
+            yUp2 = yUp2 - 1.0
+            upImageView2.frame = CGRectMake(xArray[2], yUp2, 80, 80)
+            if yUp2 < 80 {
+                upImageView2.removeFromSuperview()
+                yUp2 = 450
+            }
+        }
+        
+        
+        if upImageView3 != nil {
+            yUp3 = yUp3 - 1.0
+            upImageView3.frame = CGRectMake(xArray[3], yUp3, 80, 80)
+            if yUp3 < 80{
+                upImageView3.removeFromSuperview()
+                yUp3 = 450
+                
+            }
+        }
+    }
+
+    //ボタンがタップされたらupImageViewを発射する。１つのレーンに存在できるのは1つだけ（連射できない）。
     func onTapUpButton(sender: UIButton) {
         print(sender.tag)
         switch sender.tag {
@@ -251,45 +253,45 @@ class ViewController: UIViewController {
         }
     }
     
-    //ImageViewを作る機能
+    //上から降ってくるImageViewを作る機能
     func makeImageView() {
         let randInt = Int(rand()%4)//0,1,2,3 の中から一つ
         NSLog("\(randInt)")
-        switch randInt {
+        switch randInt { //randIntの値に合わせてImageViewを生成する。
         case 0:
-            if counter0 == 1 {
+            if counter0 == 0 {
                 y0 = 0
                 testImageView0 = UIImageView(frame: CGRectMake(xArray[0], 0, 80, 80))
                 testImageView0.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 0.3)
                 self.view.addSubview(testImageView0)
-                counter0 = 0
+                counter0 = 1
             }
 
         case 1:
-            if counter1 == 1 {
+            if counter1 == 0 {
                 y1 = 0
                 testImageView1 = UIImageView(frame: CGRectMake(xArray[1], 0, 80, 80))
                 testImageView1.backgroundColor = UIColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 0.3)
                 self.view.addSubview(testImageView1)
-                counter1 = 0
+                counter1 = 1
             }
             
         case 2:
-            if counter2 == 1 {
+            if counter2 == 0 {
                 y2 = 0
                 testImageView2 = UIImageView(frame: CGRectMake(xArray[2], 0, 80, 80))
                 testImageView2.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: 0.3)
                 self.view.addSubview(testImageView2)
-                counter2 = 0
+                counter2 = 1
             }
 
         case 3:
-            if counter3 == 1 {
+            if counter3 == 0 {
                 y3 = 0
                 testImageView3 = UIImageView(frame: CGRectMake(xArray[3], 0, 80, 80))
                 testImageView3.backgroundColor = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 0.3)
                 self.view.addSubview(testImageView3)
-                counter3 = 0
+                counter3 = 1
             }
 
         default :
